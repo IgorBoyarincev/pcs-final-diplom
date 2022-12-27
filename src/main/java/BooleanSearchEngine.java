@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class BooleanSearchEngine implements SearchEngine {
-    protected static Map<String, List<PageEntry>> wordIndexingStorage;
+    protected Map<String, List<PageEntry>> wordIndexingStorage;
 
     public BooleanSearchEngine(File pdfsDir) throws IOException {
         wordIndexingStorage = IndexedStorage.getIndexedStorage().getStorage();
@@ -36,7 +36,6 @@ public class BooleanSearchEngine implements SearchEngine {
 
                     List<PageEntry> temporaryListPage = new ArrayList<>();
                     temporaryListPage.add(new PageEntry(namePdfFile, j + 1, temporaryValue));
-
                     if (wordIndexingStorage.containsKey(temporaryWord)) {
                         wordIndexingStorage.get(temporaryWord).add(new PageEntry(namePdfFile, j + 1, temporaryValue));
                     } else {

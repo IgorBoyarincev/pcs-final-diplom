@@ -13,7 +13,6 @@ public class Main {
 /**
         try {
             BooleanSearchEngine engine = new BooleanSearchEngine(new File("pdfs"));
-            //BooleanSearchEngine.wordIndexingStorage.forEach((k,v)-> System.out.println(k+" "+v));
             List<PageEntry> resultList = engine.search("бизнес");
             int size = resultList.size();
             System.out.println("бизнес");
@@ -34,7 +33,6 @@ public class Main {
 */
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             BooleanSearchEngine engine = new BooleanSearchEngine(new File("pdfs"));
-            BooleanSearchEngine.wordIndexingStorage.forEach((k, v) -> System.out.println(k + " " + v));
             while (true) {
                 try (Socket clientSocket = serverSocket.accept();
                      PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
