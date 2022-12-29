@@ -33,23 +33,33 @@ public class BooleanSearchEngine implements SearchEngine {
                 for (Map.Entry<String, Integer> entry : freques.entrySet()) {
                     String temporaryWord = entry.getKey();
                     int temporaryValue = entry.getValue();
-
                     List<PageEntry> temporaryListPage = new ArrayList<>();
                     temporaryListPage.add(new PageEntry(namePdfFile, j + 1, temporaryValue));
                     if (wordIndexingStorage.containsKey(temporaryWord)) {
                         wordIndexingStorage.get(temporaryWord).add(new PageEntry(namePdfFile, j + 1, temporaryValue));
+                        // 1-й вариант сортировки или отдельным циклом (указан ниже 2-й вариант)
+                        List<PageEntry> value = wordIndexingStorage.getOrDefault(temporaryWord, Collections.emptyList());
+                        Collections.sort(value);
+                        wordIndexingStorage.put(temporaryWord, value);
                     } else {
                         wordIndexingStorage.put(temporaryWord, temporaryListPage);
                     }
                 }
             }
         }
+        /**       //2-й вариант сортировки
+         for (Map.Entry<String,List<PageEntry>>entry:wordIndexingStorage.entrySet()){
+         List<PageEntry>value=entry.getValue();
+         Collections.sort(value);
+         wordIndexingStorage.put(entry.getKey(),value);
+         }
+         //подскажите какой предпочтительней.
+         */
     }
 
     @Override
     public List<PageEntry> search(String word) {
         List<PageEntry> pageEntries = wordIndexingStorage.getOrDefault(word.toLowerCase(), Collections.emptyList());
-        Collections.sort(pageEntries);
         return pageEntries;
     }
 }
