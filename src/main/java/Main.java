@@ -33,8 +33,8 @@ public class Main {
 */
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             BooleanSearchEngine engine = new BooleanSearchEngine(new File("pdfs"));
+            System.out.println("SERVER STARTED...");
             while (true) {
-                System.out.println("SERVER STARTED...");
                 try (Socket clientSocket = serverSocket.accept();
                      PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                      BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -48,8 +48,6 @@ public class Main {
                     String json = gson.toJson(page);
                     out.println(json + "\n");
                     out.flush();
-                    System.out.println();
-                    System.out.println(json);
                 }
             }
         } catch (IOException e) {

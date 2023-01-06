@@ -38,23 +38,23 @@ public class BooleanSearchEngine implements SearchEngine {
                     if (wordIndexingStorage.containsKey(temporaryWord)) {
                         wordIndexingStorage.get(temporaryWord).add(new PageEntry(namePdfFile, j + 1, temporaryValue));
                         // 1-й вариант сортировки или отдельным циклом (указан ниже 2-й вариант)
-                        List<PageEntry> value = wordIndexingStorage.getOrDefault(temporaryWord, Collections.emptyList());
-                        Collections.sort(value);
-                        wordIndexingStorage.put(temporaryWord, value);
+                        //List<PageEntry> value = wordIndexingStorage.getOrDefault(temporaryWord, Collections.emptyList());
+                        //Collections.sort(value);
+                        //wordIndexingStorage.put(temporaryWord, value);
                     } else {
                         wordIndexingStorage.put(temporaryWord, temporaryListPage);
                     }
                 }
             }
         }
-        /**       //2-й вариант сортировки
-         for (Map.Entry<String,List<PageEntry>>entry:wordIndexingStorage.entrySet()){
-         List<PageEntry>value=entry.getValue();
-         Collections.sort(value);
-         wordIndexingStorage.put(entry.getKey(),value);
-         }
-         //подскажите какой предпочтительней.
-         */
+        // 2-й вариант сортировки предпочтительный
+        for (Map.Entry<String, List<PageEntry>> entry : wordIndexingStorage.entrySet()) {
+            List<PageEntry> value = entry.getValue();
+            if (value.size() > 1) {
+                Collections.sort(value);
+            }
+            wordIndexingStorage.put(entry.getKey(), value);
+        }
     }
 
     @Override

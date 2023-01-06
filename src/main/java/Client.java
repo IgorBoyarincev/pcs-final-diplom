@@ -24,7 +24,7 @@ public class Client {
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         ) {
-            System.out.println("INPUT WORD FOR SEARCH: ");
+            System.out.print("INPUT WORD FOR SEARCH:   ");
             String word = scan.nextLine();
             out.write(word + "\n");
             out.flush();
